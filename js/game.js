@@ -1,6 +1,7 @@
 let game = {
   canvas: null,
   ctx: null,
+  board: null,
   sprites: {
     background: null,
     body: null,
@@ -9,10 +10,12 @@ let game = {
     food: null,
     head: null,
   },
-
-  start() {
+  init() {
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
+  },
+  start() {
+    this.init();
     this.preload(() => {
       this.render();
     });
@@ -31,11 +34,16 @@ let game = {
     }
   },
   render() {
+    this.board.create();
     window.requestAnimationFrame(() => {
       this.ctx.drawImage(this.sprites.background, 0, 0);
-      this.ctx.drawImage(this.sprites.body, 20, 0);
-      this.ctx.drawImage(this.sprites.bomb, 0, 0);
+      //this.ctx.drawImage(this.sprites.body, 20, 0);
+      //this.ctx.drawImage(this.sprites.bomb, 0, 0);
+      this.board.render();
     });
+
+
+
   },
 };
 
