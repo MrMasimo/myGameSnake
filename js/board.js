@@ -17,12 +17,17 @@ game.board = {
     let offsetX = (this.game.canvas.width - cellSize * this.size) / 2;
     let offsetY = (this.game.canvas.height - cellSize * this.size) / 2;
     return {
+      row: row,
+      col: col,
       x: row * cellSize + offsetX,
       y: col * cellSize + offsetY,
     };
   },
+  getCell(row, col) {
+    return this.cells.find(cell => cell.row === row && cell.col === col);
+  },
   render() {
-         this.cells.forEach(cell => this.game.ctx.drawImage(this.game.sprites.cell, cell.x, cell.y));
+    this.cells.forEach(cell => this.game.ctx.drawImage(this.game.sprites.cell, cell.x, cell.y));
   },
 
 };
