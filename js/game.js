@@ -53,7 +53,6 @@ let game = {
 
     this.width = Math.round((data.realWidth * this.height) / data.realHeight);
     this.canvas.style.width = "100%";
-    alert(this.height);
   },
   fitHeight(data) {
     this.height = data.maxHeight;
@@ -67,7 +66,7 @@ let game = {
   start() {
     this.init();
     this.preload(() => {
-      this.render();
+      this.run();
     });
   },
   preload(callback) {
@@ -82,21 +81,40 @@ let game = {
       };
     }
   },
-  render() {
+  create() {
     this.board.create();
     this.snake.create();
+    this.board.createFood();
+    //Events
+    window.addEventListener("keydown", (e) => {
 
+      this.snake.start(e.code);
+     });
+  },
+  update() {
+    this.snake.move();
+    this.render();
+  },
+  run() {
+    this.create();
+    setInterval(() => {
+      this.update();
+     }, 150);
+  },
+  render() {
     window.requestAnimationFrame(() => {
+      //this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.drawImage(
         this.sprites.background,
         (this.width - this.sprites.background.width) / 2,
         (this.height - this.sprites.background.height) / 2
       );
-      //this.ctx.drawImage(this.sprites.body, 20, 0);
-      //this.ctx.drawImage(this.sprites.bomb, 0, 0);
       this.board.render();
       this.snake.render();
     });
+  },
+  random(min, max) {
+    return Math.floor(Math.random() * (max + 1 - min)) + min;
   },
 };
 

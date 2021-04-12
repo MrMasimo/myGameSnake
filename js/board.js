@@ -19,15 +19,38 @@ game.board = {
     return {
       row: row,
       col: col,
-      x: row * cellSize + offsetX,
-      y: col * cellSize + offsetY,
+      x: col * cellSize + offsetX,
+      y: row * cellSize + offsetY,
     };
+  },
+  getRandomAvalibleCell() {
+    let pool = this.cells.filter(cell => {
+      return !game.snake.hasCell(cell);
+    });
+    let randomAvalibleCell = game.random(0, pool.length - 1);
+    return pool[randomAvalibleCell];
+  },
+  createFood() {
+    let curCell = this.cells.find(cell => cell.hasFood)
+    if (curCell)
+      curCell.hasFood = false;
+
+    let randomCell = this.getRandomAvalibleCell();
+    randomCell.hasFood = true;
+  },
+  isFoodCell(cell) {
+    return cell.hasFood; ;
   },
   getCell(row, col) {
     return this.cells.find(cell => cell.row === row && cell.col === col);
   },
   render() {
-    this.cells.forEach(cell => this.game.ctx.drawImage(this.game.sprites.cell, cell.x, cell.y));
+    this.cells.forEach(cell => {
+      this.game.ctx.drawImage(this.game.sprites.cell, cell.x, cell.y);
+      if (cell.hasFood)
+        this.game.ctx.drawImage(this.game.sprites.food, cell.x, cell.y);
+
+    });
   },
 
 };
