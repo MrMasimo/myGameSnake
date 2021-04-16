@@ -36,7 +36,7 @@ let game = {
     this.initStyleText();
   },
   initStyleText() {
-    this.ctx.font = "14px Cactus";
+    this.ctx.font = "14px Snake";
     this.ctx.fillStyle = "#ffffff";
   },
   initDimensions() {
@@ -144,9 +144,9 @@ let game = {
         (this.height - this.sprites.background.height) / 2
       );
       this.ctx.fillText(
-        `Apples: ${this.apples}`,
+        `Mice: ${this.apples}`,
         this.width / 2 - 140,
-        this.height / 2 - 147
+        this.height / 2 - 145
       );
       this.board.render();
       this.snake.render();

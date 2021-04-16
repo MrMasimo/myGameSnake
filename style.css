@@ -1,5 +1,5 @@
 body{
-  background-color: #A5511F;
+  background-color: #4A210B;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -17,12 +17,12 @@ canvas{
 }
 
 @font-face {
-  font-family: "Cactus";
-  src: url("fonts/Cactus.otf");
+  font-family: "Snake";
+  src: url("fonts/Snake.otf");
 }
 
 .fontPreload{
-  font-family: "Cactus";
+  font-family: "Snake";
   position: absolute;
   left: -100px;
 
